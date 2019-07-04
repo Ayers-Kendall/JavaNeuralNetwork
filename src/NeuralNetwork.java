@@ -30,9 +30,9 @@ public class NeuralNetwork {
     	
     	// Create the layers
     	layers = new Layer[3];
-    	layers[0] = null; // Input Layer 0,2
-    	layers[1] = new Layer(2,6); // Hidden Layer 2,6
-    	layers[2] = new Layer(6,1); // Output Layer 6,1
+    	layers[0] = null; // Input Layer 0 , # inputs
+    	layers[1] = new Layer(numIn,numOut1); // Hidden Layer # inputs , # out1
+    	layers[2] = new Layer(numOut1,numOutFinal); // Output Layer #out1, #outFinal
         
         // CHANGE LATER TO OUTPUT TO FILE
         
@@ -150,7 +150,7 @@ public class NeuralNetwork {
  
     
     // This function is used to train forward and backward.
-    public static void train(int training_iterations,int batchSize, float learning_rate) {
+    public static void train(int training_iterations, float learning_rate) {
     	for(int i = 0; i < training_iterations; i++) {
     		for(int j = 0; j < dataSet.length; j++) {
     			forward(dataSet[j].data);
