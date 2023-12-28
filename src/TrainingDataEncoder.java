@@ -1,4 +1,5 @@
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,10 +24,10 @@ public class TrainingDataEncoder {
             BufferedReader csvReader = new BufferedReader(new InputStreamReader(fileInputStream));
             int skipCount = 0;
             while (skipCount < headerLines) {
-            	csvReader.readLine();
+            	BoundedLineReader.readLine(csvReader, 5_000_000);
             	skipCount++;
             }
-            while ((row = csvReader.readLine()) != null) {  
+            while ((row = BoundedLineReader.readLine(csvReader, 5_000_000)) != null) {  
             	this.rows++;
                 String[] data = row.split(",");
                 for (int i = 0; i < data.length; i++) {
